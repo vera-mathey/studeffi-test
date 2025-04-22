@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="container align-items-center mt-5">
+        <div class="row">
+            {#logo#}     
+            <div class="col-md-2 col-xs-4 col-sm-4 logo"><a class="logo" href="{{path('app_studeffi')}}">Studeo</a></div>
+            
+            {#end logo#}
+            {#menu#}
+            <div class="col-md-5 col-xs-4 col-sm-4 fixed-top-navbar menu">
+                <nav class="navbar navbar-expand-lg shadow-5-strong">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="light">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item me-2">
+                                    <a class="nav-link" aria-current="page" href="{{path('app_studeffi')}}">Accueil</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a class="nav-link" aria-current="page" href="{{path('app_login')}}">Accès client</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a class="nav-link" aria-current="page" href="{{path('app_studeffi')}}">Fonctionnalités</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a class="nav-link" aria-current="page" href="{{path('app_studeffi')}}">Tarifs</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a class="nav-link" aria-current="page" href="{{path('app_studeffi')}}">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>            
+                </nav>
+            </div>
+            {#end menu#}
+            {#login logout#}
+            <div class="col-md-5 col-xs-4 col-sm-4 connexion-mobile align-items-center">
+                <div class="row">
+                    {#login logout#}
+                    <div class="connexion d-flex flex-row-reverse col-md-10 col-xs-3 col-sm-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if app.user %}
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <small class="connexion-white me-2">{{ app.user.firstname }}</small><span class="connexion-white me-2">{{ app.user.lastname }}</span>   
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            {% if app.user.isRoleadmin() %}
+                                                <li><a class="dropdown-item" href="{{ path('admin') }}"><i class="fa-solid fa-laptop-code connexion me-2"></i>Tableau de bord</a></li>
+                                            {% endif %}
+                                            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>&ensp;Déconnexion</a></li>
+                                        </ul>
+                                    </div>
+                                {% else %}
+                                    <a class="connexion me-3" href="{{ path('app_login') }}" style="cursor:pointer">
+                                        <i class="fa-solid fa-user connexion me-2"></i>Connexion
+                                    </a>
+                                    <a class="connexion me-3 mobile-hiden" href="{{ path('app_register') }}" style="cursor:pointer">
+                                        <i class="fa-solid fa-user-plus connexion me-2"></i>Inscription
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                {#end login logout#}         
+            </div>
+        </div>
+        {#end login logout#}
+    </div>
+</div>

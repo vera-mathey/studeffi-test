@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container-fluid full-height-page">    
+        <div class="container mt-5 mb-5">
+        <div class="row mt-5 mb-5">
+        <div class="col-md-3 mt-5"></div>
+        <div class="col-md-6 mt-5">
+            <h1 class="mt-5 mb-5">Inscrivez-vous</h1>
+            <div class="col-md-12 mb-5">Vous avez déjà un compte ? <a class="text-carusel" href="{{ path('app_login') }}">Se connecter</a></div>
+            <form method="post" enctype="multipart/form-data" class="row g-3 mb-6">
+                {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                <div class="col-md-6 mb-3 text-carusel">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}, 'label': false}) }}
+                </div>
+                <div class="col-md-6 mb-3 text-carusel">
+                    {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}, 'label': false}) }}
+                </div>
+                <div class="col-md-6 mb-3 text-carusel">
+                    {{ form_row(registrationForm.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}, 'label': false}) }}
+                </div>
+                <div class="col-md-6 mb-3 text-carusel">
+                    {{ form_row(registrationForm.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}, 'label': false}) }}
+                </div>
+                {# Ajout du champ CSRF token #}
+                {{ form_row(registrationForm._token) }}
+                <div class="col-12">
+                    <div class="row mb-5">
+                        {{ form_row(registrationForm.agreeTerms) }}
+                        <div class="col-md-12 mt-4 mb-5"><button type="submit" class="btn button-green">S'inscrire</button></div>
+                        
+                        <div class="col-md-2 mt-5 mb-5"></div>
+                    </div>
+                </div>
+
+                {{ form_end(registrationForm) }}
+            </form>
+            </div>
+            <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

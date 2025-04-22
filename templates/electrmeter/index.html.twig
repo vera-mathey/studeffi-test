@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Studeffi{% endblock %}
+
+{% block body %}
+<div class="container wrapper"> 
+  {% if app.user %}
+    <h2 class="mt-5 mb-5">Mes compteurs</h2>
+      <div class="row">
+          {% for electrMeterList in electrMeterList %}
+        <div class="col-md-12 mt-2">
+          <div class="col-md-12"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.owner }}, {{ electrMeterList.streetNumber }}, {{ electrMeterList.streetName }}, {{ electrMeterList.city }}</a></div>
+        </div>
+      {% endfor %}
+      </div>
+  {% else %}
+  <div class="row mt-5 align-items-center main">
+    <div class="col-md-6"><img src="{{asset('images/undraw_electricity_iu6d2.svg')}}"></div>
+    <div class="col-md-6">
+      <h1>Optimisez votre consommation électrique, pour vous et pour la planète</h1>
+      <div class="mt-5"><a class="connexion button-green" href="{{ path('app_login') }}">Connectez-vous</a></div>
+  </div> 
+</div>
+{% endif %}
+</div>
+{% endblock %}

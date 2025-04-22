@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="container-fluid full-height-page">
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    {% endif %}
+    
+    <div class="container mt-5 mb-5">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-3 mt-5 mb-5"></div>
+            <div class="col-md-6 justify-content-center">
+            <h1 class="mt-5">Identifiez-vous</h1>
+            <div class="col-md-5 mb-5">ou <a href="{{path('app_register')}}"> créer un compte</a></div>
+            <div class="mb-4">
+            <label class="mb-2 text-carusel" for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+            <div class="mb-4">
+            <label class="mb-2 text-carusel" for="inputPassword">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <div class="row">
+                <div class="col-md-5 mt-4 mb-5"><button class="btn buttons  button-green" type="submit">S'identifier</button></div>   
+            </div>
+        </div>
+        <div class="col-md-3 mb-5"></div>
+    </div>
+    </div>
+    
+</form>
+</div>
+{% endblock %}
