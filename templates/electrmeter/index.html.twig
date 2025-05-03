@@ -8,8 +8,13 @@
     <h2 class="mt-5 mb-5">Mes compteurs</h2>
       <div class="row">
           {% for electrMeterList in electrMeterList %}
-        <div class="col-md-12 mt-2">
-          <div class="col-md-12"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.owner }}, {{ electrMeterList.streetNumber }}, {{ electrMeterList.streetName }}, {{ electrMeterList.city }}</a></div>
+        <div class="col-md-2 mt-2 card">
+          <a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"></a>
+          <div class="col-md-12 mt-3"><img class="img-compteur" src="images/speedometer-1081563.svg"></div>
+          <div class="card-body">
+            <h5 class="card-title"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.name }}</a></h5>
+            <a href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}" class="btn button-green">Consulter</a>
+          </div>
         </div>
       {% endfor %}
       </div>

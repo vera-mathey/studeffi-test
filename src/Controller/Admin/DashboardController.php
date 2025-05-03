@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\ElectrMeter;
 use App\Entity\User;
+use App\Entity\Reading;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -11,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use App\Repository\UserRepository;
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
@@ -52,6 +54,14 @@ class DashboardController extends AbstractDashboardController
             ->setSubItems([
                 MenuItem::LinkToCrud("Créer un compteur d'électricité", 'fa-regular fa-square-plus', ElectrMeter::class)->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud("Voir les compteurs d'électricité", 'fas fa-eye', ElectrMeter::class)
+            ]);
+        }
+        if($this->isGranted('ROLE_EDITOR')){
+            yield MenuItem::section("Relevé");
+            yield MenuItem::subMenu("Releves", 'fas fa-newspaper')
+            ->setSubItems([
+                MenuItem::LinkToCrud("Créer un relevé", 'fa-regular fa-square-plus', Reading::class)->setAction(Crud::PAGE_NEW),
+                MenuItem::linkToCrud("Voir les relevés", 'fas fa-eye', Reading::class)
             ]);
         }
         if($this->isGranted('ROLE_ADMIN')){

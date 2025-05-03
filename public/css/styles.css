@@ -82,6 +82,17 @@ h2{
     min-height: 100vh;
     justify-content: center;
   }
+.img-compteur{
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+.card:hover{
+    background-color: #5fbf0041;
+    box-shadow: #5fbf00;
+    border-color: #5fbf00;
+}
 /*footer*/
 .footer{
     background-color: #e4e4e4;

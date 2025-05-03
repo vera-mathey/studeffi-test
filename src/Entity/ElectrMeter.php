@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ElectrMeterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ElectrMeterRepository::class)]
@@ -14,7 +16,7 @@ class ElectrMeter
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $owner = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $streetNumber = null;
@@ -31,19 +33,34 @@ class ElectrMeter
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $streetName = null;
 
+    #[ORM\ManyToOne(inversedBy: 'electrMeters')]
+    private ?User $user = null;
+
+    #[ORM\OneToMany(targetEntity: Reading::class, mappedBy: 'electrMeter', orphanRemoval: true)]
+    private Collection $readings;
+
+    public function __construct()
+    {
+        $this->readings = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getOwner(): ?string
+    public function __toString()
     {
-        return $this->owner;
+        $format = "electrMeter(name:%s, city:%s,)\n";
+        return sprintf($this->name, $this->city);
+    }
+    public function getname(): ?string
+    {
+        return $this->name;
     }
 
-    public function setOwner(?string $owner): static
+    public function setname(?string $name): static
     {
-        $this->owner = $owner;
+        $this->name = $name;
 
         return $this;
     }
@@ -104,6 +121,48 @@ class ElectrMeter
     public function setStreetName(?string $streetName): static
     {
         $this->streetName = $streetName;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reading>
+     */
+    public function getReadings(): Collection
+    {
+        return $this->readings;
+    }
+
+    public function addReading(Reading $reading): static
+    {
+        if (!$this->readings->contains($reading)) {
+            $this->readings->add($reading);
+            $reading->setElectrMeter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReading(Reading $reading): static
+    {
+        if ($this->readings->removeElement($reading)) {
+            // set the owning side to null (unless already changed)
+            if ($reading->getElectrMeter() === $this) {
+                $reading->setElectrMeter(null);
+            }
+        }
 
         return $this;
     }

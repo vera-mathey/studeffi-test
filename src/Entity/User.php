@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -37,6 +39,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?bool $roleadmin = null;
+
+    #[ORM\OneToMany(targetEntity: ElectrMeter::class, mappedBy: 'user')]
+    private Collection $electrMeters;
+
+    public function __construct()
+    {
+        $this->electrMeters = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -163,6 +173,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoleadmin(?bool $roleadmin): static
     {
         $this->roleadmin = $roleadmin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ElectrMeter>
+     */
+    public function getElectrMeters(): Collection
+    {
+        return $this->electrMeters;
+    }
+
+    public function addElectrMeter(ElectrMeter $electrMeter): static
+    {
+        if (!$this->electrMeters->contains($electrMeter)) {
+            $this->electrMeters->add($electrMeter);
+            $electrMeter->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElectrMeter(ElectrMeter $electrMeter): static
+    {
+        if ($this->electrMeters->removeElement($electrMeter)) {
+            // set the owning side to null (unless already changed)
+            if ($electrMeter->getUser() === $this) {
+                $electrMeter->setUser(null);
+            }
+        }
 
         return $this;
     }

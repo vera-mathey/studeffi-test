@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class ElectrMeterCrudController extends AbstractCrudController
 {
@@ -44,12 +45,13 @@ class ElectrMeterCrudController extends AbstractCrudController
     {
         return [
             IntegerField::new('id')->OnlyOnIndex(),
-            TextField::new('owner'),
+            TextField::new('name'),
             TextField::new('streetNumber'),
             TextField::new('streetName'),
             TextField::new('postalCode'),
             TextField::new('city'),
             TextField::new('codeInsee')->setFormType(TextType::class)->setFormTypeOption('disabled', true), // Champ INSEE, non modifiable
+            AssociationField::new('user')->setColumns('col-md-3'),
         ];
     }
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
