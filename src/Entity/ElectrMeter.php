@@ -48,17 +48,16 @@ class ElectrMeter
     {
         return $this->id;
     }
-    public function __toString()
+    public function __toString(): string
     {
-        $format = "electrMeter(name:%s, city:%s,)\n";
-        return sprintf($this->name, $this->city);
+        return sprintf("electrMeter(name:%s, city:%s)", $this->name ?? '', $this->city ?? '');
     }
-    public function getname(): ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setname(?string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 

@@ -7,17 +7,24 @@
   {% if app.user %}
     <h2 class="mt-5 mb-5">Mes compteurs</h2>
       <div class="row">
-          {% for electrMeterList in electrMeterList %}
-        <div class="col-md-2 mt-2 card">
-          <a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"></a>
-          <div class="col-md-12 mt-3"><img class="img-compteur" src="images/speedometer-1081563.svg"></div>
-          <div class="card-body">
-            <h5 class="card-title"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.name }}</a></h5>
-            <a href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}" class="btn button-green">Consulter</a>
+        {% for electrMeterList in electrMeterList %}
+          <div class="col-md-2 mt-2 me-3 card align-items-center">
+            <a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"></a>
+            <div class="col-md-12 mt-3"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"><img class="img-compteur" src="images/speedometer-1081563.svg"></a></div>
+            <div class="card-body mt-3 text-center">
+              <h5 class="card-title"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.name }}</a></h5>
+            </div>
+          </div> 
+        {% endfor %}
+        <div class="col-md-2 mt-2 me-3 card align-items-center">
+          <div class="col-md-12 mt-3 text-center">
+            <a href="{{ path('app_addElectrMeter') }}" class="align-items-center icon-add"><i class="fa-solid fa-plus"></i></a>
           </div>
-        </div>
-      {% endfor %}
-      </div>
+          <div class="card-body mt-3 text-center">
+            <h5 class="card-title"><a class="link" href="{{ path('app_addElectrMeter') }}">Nouveau compteur</a></h5>
+          </div>
+        </div>        
+      </div>     
   {% else %}
   <div class="row mt-5 align-items-center main">
     <div class="col-md-6"><img src="{{asset('images/undraw_electricity_iu6d2.svg')}}"></div>
