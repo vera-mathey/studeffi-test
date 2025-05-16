@@ -46,8 +46,7 @@ class ElectrMeterCrudController extends AbstractCrudController
         return [
             IntegerField::new('id')->OnlyOnIndex(),
             TextField::new('name'),
-            TextField::new('streetNumber'),
-            TextField::new('streetName'),
+            TextField::new('address'),
             TextField::new('postalCode'),
             TextField::new('city'),
             TextField::new('codeInsee')->setFormType(TextType::class)->setFormTypeOption('disabled', true), // Champ INSEE, non modifiable

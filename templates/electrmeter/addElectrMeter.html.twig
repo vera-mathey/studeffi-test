@@ -17,16 +17,13 @@
                     {{ form_row(electrMeterForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}, 'label': false}) }}
                 </div>
                 <div class="col-md-6 mb-3 text-carusel">
-                    {{ form_row(electrMeterForm.streetNumber, {'attr': {'class': 'form-control', 'placeholder': 'Numéro de voie'}, 'label': false}) }}
+                    {{ form_row(electrMeterForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Adresse...', 'id': 'electr_meter_form_address'}, 'label': false}) }}
                 </div>
                 <div class="col-md-6 mb-3 text-carusel">
-                    {{ form_row(electrMeterForm.streetName, {'attr': {'class': 'form-control', 'placeholder': 'Nome de voie'}, 'label': false}) }}
+                    {{ form_row(electrMeterForm.postalCode, {'attr': {'class': 'form-control', 'placeholder': 'Code Postale', 'id': 'electr_meter_form_postalCode' }, 'label': false}) }}
                 </div>
                 <div class="col-md-6 mb-3 text-carusel">
-                    {{ form_row(electrMeterForm.postalCode, {'attr': {'class': 'form-control', 'placeholder': 'Code Postale'}, 'label': false}) }}
-                </div>
-                <div class="col-md-6 mb-3 text-carusel">
-                    {{ form_row(electrMeterForm.city, {'attr': {'class': 'form-control', 'placeholder': 'Ville'}, 'label': false}) }}
+                    {{ form_row(electrMeterForm.city, {'attr': {'class': 'form-control', 'placeholder': 'Ville', 'id': 'electr_meter_form_city' },  'label': false}) }}
                 </div>
                 <div class="col-12">
                     <div class="row mb-5">

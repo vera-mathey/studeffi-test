@@ -19,7 +19,7 @@ class ElectrMeter
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $streetNumber = null;
+    private ?string $address = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $postalCode = null;
@@ -29,9 +29,6 @@ class ElectrMeter
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $codeInsee = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $streetName = null;
 
     #[ORM\ManyToOne(inversedBy: 'electrMeters')]
     private ?User $user = null;
@@ -64,14 +61,14 @@ class ElectrMeter
         return $this;
     }
 
-    public function getStreetNumber(): ?string
+    public function getAddress(): ?string
     {
-        return $this->streetNumber;
+        return $this->address;
     }
 
-    public function setStreetNumber(?string $streetNumber): static
+    public function setAddress(?string $address): static
     {
-        $this->streetNumber = $streetNumber;
+        $this->address = $address;
 
         return $this;
     }
@@ -108,18 +105,6 @@ class ElectrMeter
     public function setCodeInsee(?string $codeInsee): static
     {
         $this->codeInsee = $codeInsee;
-
-        return $this;
-    }
-
-    public function getStreetName(): ?string
-    {
-        return $this->streetName;
-    }
-
-    public function setStreetName(?string $streetName): static
-    {
-        $this->streetName = $streetName;
 
         return $this;
     }

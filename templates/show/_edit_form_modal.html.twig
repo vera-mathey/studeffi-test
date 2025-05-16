@@ -1,0 +1,12 @@
+<form method="post">
+    <div class="modal-header">
+        <h5 class="modal-title">Modifier le relevé</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+    </div>
+    <div class="modal-body">
+        {{ form_start(form) }}
+            {{ form_row(form.date) }}
+            {{ form_row(form.value) }}
+        {{ form_end(form) }}
+    </div>
+</form>

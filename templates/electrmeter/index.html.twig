@@ -9,19 +9,18 @@
       <div class="row">
         {% for electrMeterList in electrMeterList %}
           <div class="col-md-2 mt-2 me-3 card align-items-center">
-            <a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"></a>
-            <div class="col-md-12 mt-3"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"><img class="img-compteur" src="images/speedometer-1081563.svg"></a></div>
+            <div class="col-md-12 mt-3"><a class="link stretched-link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}"><img class="img-compteur" src="images/speedometer-1081563.svg"></a></div>
             <div class="card-body mt-3 text-center">
-              <h5 class="card-title"><a class="link" href="{{ path('showoneelectrmeter', {'id' : electrMeterList.id}) }}">{{ electrMeterList.name }}</a></h5>
+              <h5 class="card-title">{{ electrMeterList.name }}</h5>
             </div>
           </div> 
         {% endfor %}
         <div class="col-md-2 mt-2 me-3 card align-items-center">
           <div class="col-md-12 mt-3 text-center">
-            <a href="{{ path('app_addElectrMeter') }}" class="align-items-center icon-add"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ path('app_addElectrMeter') }}" class="align-items-center icon-add stretched-link"><i class="fa-solid fa-plus"></i></a>
           </div>
           <div class="card-body mt-3 text-center">
-            <h5 class="card-title"><a class="link" href="{{ path('app_addElectrMeter') }}">Nouveau compteur</a></h5>
+            <h5 class="card-title">Nouveau compteur</h5>
           </div>
         </div>        
       </div>     

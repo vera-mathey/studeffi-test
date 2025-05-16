@@ -17,6 +17,63 @@
         {%include('elements/footer.html.twig')%} 
         {% block javascripts %}
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+            <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addressInput = document.getElementById('electr_meter_form_address');
+        const cityInput = document.getElementById('electr_meter_form_city');
+        const postalCodeInput = document.getElementById('electr_meter_form_postalCode');
+        const suggestionBox = document.createElement('ul');
+        suggestionBox.style.border = '1px solid #ccc';
+        suggestionBox.style.position = 'absolute';
+        suggestionBox.style.backgroundColor = 'white';
+        suggestionBox.style.listStyle = 'none';
+        suggestionBox.style.padding = '0';
+        suggestionBox.style.margin = '0';
+        suggestionBox.style.zIndex = '999';
+        suggestionBox.style.maxHeight = '200px';
+        suggestionBox.style.overflowY = 'auto';
+
+        addressInput.parentNode.style.position = 'relative';
+        addressInput.parentNode.appendChild(suggestionBox);
+
+        addressInput.addEventListener('input', function () {
+            const query = addressInput.value;
+            if (query.length < 3) {
+                suggestionBox.innerHTML = '';
+                return;
+            }
+
+            fetch('https://api-adresse.data.gouv.fr/search/?q=' + encodeURIComponent(query) + '&limit=20')
+                .then(response => response.json())
+                .then(data => {
+                    suggestionBox.innerHTML = '';
+                    data.features.forEach(feature => {
+                        const li = document.createElement('li');
+                        li.textContent = feature.properties.label;
+                        li.style.padding = '5px';
+                        li.style.cursor = 'pointer';
+                        li.addEventListener('click', function () {
+                            addressInput.value = feature.properties.label;
+                            suggestionBox.innerHTML = '';
+
+                            const city = feature.properties.city;
+                            const postalCode = feature.properties.postcode;
+                            if (cityInput) cityInput.value = city || '';
+                            if (postalCodeInput) postalCodeInput.value = postalCode || ''; 
+                        });
+                        suggestionBox.appendChild(li);
+                    });
+                });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!suggestionBox.contains(e.target) && e.target !== addressInput) {
+                suggestionBox.innerHTML = '';
+            }
+        });
+    });
+</script>
+<script src="{{ asset('js/editReading.js') }}"></script>
         {% endblock %}
     </body>
 </html>

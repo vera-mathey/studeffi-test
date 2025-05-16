@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\ElectrMeter;
 use App\Entity\Reading;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,10 +21,17 @@ class ReadingRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Reading::class);
     }
-
-//    /**
-//     * @return Reading[] Returns an array of Reading objects
-//     */
+    public function findByElectrMeter(string $electrMeterName): array
+    {
+        return $this->createQueryBuilder("e")
+        ->where('e.electrMeter = :electrMeterName')
+        ->setParameter('electrMeterName', $electrMeterName)
+        ->getQuery()
+        ->getResult();
+    }
+    /**
+     * @return Reading[] Returns an array of Reading objects
+     */
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('r')

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ElectrMeter;
+use App\Entity\Reading;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -13,22 +14,20 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ElectrMeterFormType extends AbstractType
+class ReadingFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('address')
-            ->add('postalCode')
-            ->add('city')
+            ->add('date')
+            ->add('value')
             ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ElectrMeter::class,
+            'data_class' => Reading::class,
         ]);
     }
 }

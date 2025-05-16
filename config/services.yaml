@@ -11,8 +11,12 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     App\Entity\ElectrMeter: ~
+    App\Entity\Reading: ~
     App\Entity\Users: ~
     App\Service\GeoService:
+        autowire: true
+        autoconfigure: true
+    App\Service\Address:
         autowire: true
         autoconfigure: true
 

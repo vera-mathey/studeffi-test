@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ElectrMeterFormType;
+use App\Repository\ElectrMeterRepository;
+use App\Repository\ReadingRepository;
 use App\Service\GeoService;
 //Ajouter un compteur dépuis son compte
 class AddElectrMeterController extends AbstractController
